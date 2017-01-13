@@ -42,7 +42,13 @@ void ofApp::update(){
 void ofApp::draw(){
     ofSetColor(255, 255, 255);
     
+    //draw depth image on screen
     depthImage.draw(10,10,400,300);
+    
+    //write framerate and other info to screen
+    stringstream ss;
+    ss << "Framerate: " << ofToString(ofGetFrameRate(),0) << "\n";
+    ofDrawBitmapString(ss.str().c_str(), 20, 20);
 
 }
 
