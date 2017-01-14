@@ -9,6 +9,70 @@
 		<string>46</string>
 		<key>objects</key>
 		<dict>
+			<key>DAB203DEC289665FD839E2E6</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxVideoRecorder.h</string>
+				<key>path</key>
+				<string>../../addons/ofxVideoRecorder/src/ofxVideoRecorder.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>89A809C09132402F1523C1C7</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>E257A0A417421D8C6997CA02</string>
+					<string>DAB203DEC289665FD839E2E6</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>src</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>7652B9B7014C8450639DA55C</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>89A809C09132402F1523C1C7</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>ofxVideoRecorder</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>3D1E12F8DC1C4B3DE571ADC0</key>
+			<dict>
+				<key>fileRef</key>
+				<string>E257A0A417421D8C6997CA02</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>E257A0A417421D8C6997CA02</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxVideoRecorder.cpp</string>
+				<key>path</key>
+				<string>../../addons/ofxVideoRecorder/src/ofxVideoRecorder.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>162DC475D914AFBD67058E04</key>
 			<dict>
 				<key>explicitFileType</key>
@@ -4214,6 +4278,7 @@
 					<string>480A780D8D0308AE4A368801</string>
 					<string>9683228C705CA3FF4F2EA945</string>
 					<string>A0B90D3B0ADB9C1716816714</string>
+					<string>7652B9B7014C8450639DA55C</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
@@ -4419,6 +4484,7 @@
 						<string>../../addons/ofxOpenCv/libs/opencv/lib/osx</string>
 						<string>../../addons/ofxOpenCv/libs/opencv/license</string>
 						<string>../../addons/ofxOpenCv/src</string>
+						<string>../../addons/ofxVideoRecorder/src</string>
 					</array>
 					<key>CONFIGURATION_BUILD_DIR</key>
 					<string>$(SRCROOT)/bin/</string>
@@ -4528,6 +4594,7 @@
 						<string>../../addons/ofxOpenCv/libs/opencv/lib/osx</string>
 						<string>../../addons/ofxOpenCv/libs/opencv/license</string>
 						<string>../../addons/ofxOpenCv/src</string>
+						<string>../../addons/ofxVideoRecorder/src</string>
 					</array>
 					<key>CONFIGURATION_BUILD_DIR</key>
 					<string>$(SRCROOT)/bin/</string>
@@ -4610,6 +4677,7 @@
 					<string>28189DB43CD152201712E778</string>
 					<string>63512F2008E135A7A3860582</string>
 					<string>FEE13C3059BFBFB576FCBAF7</string>
+					<string>3D1E12F8DC1C4B3DE571ADC0</string>
 				</array>
 				<key>isa</key>
 				<string>PBXSourcesBuildPhase</string>
@@ -4745,6 +4813,7 @@
 						<string>../../addons/ofxOpenCv/libs/opencv/lib/osx</string>
 						<string>../../addons/ofxOpenCv/libs/opencv/license</string>
 						<string>../../addons/ofxOpenCv/src</string>
+						<string>../../addons/ofxVideoRecorder/src</string>
 					</array>
 					<key>COMBINE_HIDPI_IMAGES</key>
 					<string>YES</string>
@@ -4844,6 +4913,7 @@
 						<string>../../addons/ofxOpenCv/libs/opencv/lib/osx</string>
 						<string>../../addons/ofxOpenCv/libs/opencv/license</string>
 						<string>../../addons/ofxOpenCv/src</string>
+						<string>../../addons/ofxVideoRecorder/src</string>
 					</array>
 					<key>COMBINE_HIDPI_IMAGES</key>
 					<string>YES</string>

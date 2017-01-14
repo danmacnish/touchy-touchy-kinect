@@ -4,6 +4,7 @@
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
 #include "ofxGui.h"
+#include "ofxVideoRecorder.h"
 
 class ofApp : public ofBaseApp{
 
