@@ -33,5 +33,8 @@ public:
     ofxFloatSlider nearClip;
     ofxFloatSlider farClip;
     ofxPanel gui;
+    
+    //angle of kinect
+    int angle;
 		
 };

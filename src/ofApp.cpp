@@ -31,6 +31,10 @@ void ofApp::setup(){
         ofLogNotice() << "failed to connect";
     };
     
+    //set angle of kinect
+    angle = 0;
+    kinect.setCameraTiltAngle(angle);
+    
     //allocate mem for depth image
     depthImage.allocate(kinect.width, kinect.height);
 
@@ -57,7 +61,7 @@ void ofApp::draw(){
     ofSetColor(255, 255, 255);
     
     //draw depth image on screen
-    depthImage.draw(100,100,400,300);
+    depthImage.draw(300,10,400,300);
     
     //draw gui
     gui.draw();
@@ -65,7 +69,9 @@ void ofApp::draw(){
     //write framerate and other info to screen
     stringstream ss;
     ss << "Framerate: " << ofToString(ofGetFrameRate(),0) << "\n";
-    ofDrawBitmapString(ss.str().c_str(), 20, 20);
+    ss << "Up key: tilt kinect up \n";
+    ss << "Down key: tilt kinect down \n";
+    ofDrawBitmapString(ss.str().c_str(), 20, 100);
 
 }
 
@@ -94,7 +100,19 @@ void ofApp::exit() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    switch(key) {
+        case OF_KEY_UP:
+            angle++;
+            if(angle>30) angle=30;
+            kinect.setCameraTiltAngle(angle);
+            break;
+            
+        case OF_KEY_DOWN:
+            angle--;
+            if(angle<-30) angle=-30;
+            kinect.setCameraTiltAngle(angle);
+            break;
+    }
 }
 
 //--------------------------------------------------------------
