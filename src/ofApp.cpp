@@ -31,6 +31,15 @@ void ofApp::setup(){
         ofLogNotice() << "failed to connect";
     };
     
+    //init video recorder
+    ofAddListener(recorder.outputFileCompleteEvent, this, &ofApp::recordingComplete);
+    fileName = "kinect data";
+    fileExtension = ".mkv";
+    // override the default codecs if you like
+    // run 'ffmpeg -codecs' to find out what your implementation supports (or -formats on some older versions)
+    recorder.setVideoCodec("rawvideo");
+    recorder.setVideoBitrate("800k");
+    
     //set angle of kinect
     angle = 0;
     kinect.setCameraTiltAngle(angle);
@@ -50,8 +59,18 @@ void ofApp::update(){
     if(kinect.isFrameNewDepth()) {
         //get the depth frame
         depthImage.setFromPixels(kinect.getDepthPixels());
+        if(recording) {
+            bool success = recorder.addFrame(depthImage.getPixels());
+            if (!success) {
+                ofLogWarning("This frame was not added!");
+            }
+        }
     }
     
+    // Check if the video recorder encountered any error while writing video frame or audio smaples.
+    if (recorder.hasVideoError()) {
+        ofLogWarning("The video recorder failed to write some frames!");
+    }
     //update cv images
     //depthImage.flagImageChanged();
 }
@@ -69,8 +88,10 @@ void ofApp::draw(){
     //write framerate and other info to screen
     stringstream ss;
     ss << "Framerate: " << ofToString(ofGetFrameRate(),0) << "\n";
+    ss << "video queue size: " << recorder.getVideoQueueSize() << endl;
     ss << "Up key: tilt kinect up \n";
     ss << "Down key: tilt kinect down \n";
+    ss << "press r to record, c to close video file";
     ofDrawBitmapString(ss.str().c_str(), 20, 100);
 
 }
@@ -89,6 +110,11 @@ void ofApp::farClipChanged(float & val) {
     //i.e. setting a smaller depth range will increase depth resolution of grayscale image
     kinect.setDepthClipping(nearClip, val);
     
+}
+
+//--------------------------------------------------------------
+void ofApp::recordingComplete(ofxVideoRecorderOutputFileCompleteEventArgs& args){
+    cout << "The recoded video file is now complete." << endl;
 }
 
 //exit-------------------------------------------------
@@ -117,7 +143,26 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    
+    if(key=='r'){
+        recording = !recording;
+        if(recording && !recorder.isInitialized()) {
+            recorder.setup(fileName+ofGetTimestampString()+fileExtension, 400, 300, 30); // no audio
+            
+            // Start recording
+            recorder.start();
+        }
+        else if(!recording && recorder.isInitialized()) {
+            recorder.setPaused(true);
+        }
+        else if(recording && recorder.isInitialized()) {
+            recorder.setPaused(false);
+        }
+    }
+    if(key=='c'){
+        recording = false;
+        recorder.close();
+    }
 }
 
 //--------------------------------------------------------------

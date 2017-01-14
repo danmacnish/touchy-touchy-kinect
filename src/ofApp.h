@@ -28,12 +28,19 @@ public:
     
     void nearClipChanged(float & val);
     void farClipChanged(float & val);
+    void recordingComplete(ofxVideoRecorderOutputFileCompleteEventArgs& args);
     
     ofxKinect kinect;
     ofxCvGrayscaleImage depthImage;
     ofxFloatSlider nearClip;
     ofxFloatSlider farClip;
     ofxPanel gui;
+    
+    //video recorder
+    ofxVideoRecorder recorder;
+    bool recording = false;
+    string fileName;
+    string fileExtension;
     
     //angle of kinect
     int angle;
