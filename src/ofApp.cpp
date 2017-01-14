@@ -6,7 +6,21 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    //set logging level
     ofSetLogLevel(OF_LOG_VERBOSE);
+    
+    //add listener methods for GUI sliders
+    nearClip.addListener(this, &ofApp::nearClipChanged);
+    farClip.addListener(this, &ofApp::farClipChanged);
+    
+    //init gui
+    gui.setup();
+    //add slider to GUI for near clipping level, init slider to value of 500mm, range 500 to 4000
+    gui.add(nearClip.setup("near clipping", 500, 500, 4000));
+    //add slider to GUI for far clipping level, init slider to value of 500mm, range 500 to 4000
+    gui.add(farClip.setup("far clipping", 4000, 500, 4000));
+    
+    //init kinect
     kinect.init();
     kinect.open();
     
@@ -43,13 +57,32 @@ void ofApp::draw(){
     ofSetColor(255, 255, 255);
     
     //draw depth image on screen
-    depthImage.draw(10,10,400,300);
+    depthImage.draw(100,100,400,300);
+    
+    //draw gui
+    gui.draw();
     
     //write framerate and other info to screen
     stringstream ss;
     ss << "Framerate: " << ofToString(ofGetFrameRate(),0) << "\n";
     ofDrawBitmapString(ss.str().c_str(), 20, 20);
 
+}
+
+//-------------------------------------------------------------
+void ofApp::nearClipChanged(float & val) {
+    //set depth clipping. sets scale factor from raw depth data (12 bit) to grayscale (8 bit)
+    //i.e. setting a smaller depth range will increase depth resolution of grayscale image
+    kinect.setDepthClipping(val, farClip);
+    
+}
+
+//-------------------------------------------------------------
+void ofApp::farClipChanged(float & val) {
+    //set depth clipping. sets scale factor from raw depth data (12 bit) to grayscale (8 bit)
+    //i.e. setting a smaller depth range will increase depth resolution of grayscale image
+    kinect.setDepthClipping(nearClip, val);
+    
 }
 
 //exit-------------------------------------------------

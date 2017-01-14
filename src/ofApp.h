@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,8 +25,13 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    void nearClipChanged(float & val);
+    void farClipChanged(float & val);
+    
     ofxKinect kinect;
     ofxCvGrayscaleImage depthImage;
-    
+    ofxFloatSlider nearClip;
+    ofxFloatSlider farClip;
+    ofxPanel gui;
 		
 };
