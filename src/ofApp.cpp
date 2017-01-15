@@ -34,11 +34,13 @@ void ofApp::setup(){
     //init video recorder
     ofAddListener(recorder.outputFileCompleteEvent, this, &ofApp::recordingComplete);
     fileName = "kinect data";
-    fileExtension = ".mkv";
+    fileExtension = ".gif";
     // override the default codecs if you like
     // run 'ffmpeg -codecs' to find out what your implementation supports (or -formats on some older versions)
-    recorder.setVideoCodec("rawvideo");
-    recorder.setVideoBitrate("800k");
+    recorder.setVideoCodec("gif");
+    recorder.setPixelFormat("gray");
+    recorder.setOutputPixelFormat("gray");
+    //recorder.setVideoBitrate("800k");
     
     //set angle of kinect
     angle = 0;
@@ -89,6 +91,7 @@ void ofApp::draw(){
     stringstream ss;
     ss << "Framerate: " << ofToString(ofGetFrameRate(),0) << "\n";
     ss << "video queue size: " << recorder.getVideoQueueSize() << endl;
+    ss << "width: " << depthImage.getWidth() << " height: " << depthImage.getHeight() << endl;
     ss << "Up key: tilt kinect up \n";
     ss << "Down key: tilt kinect down \n";
     ss << "press r to record, c to close video file";
@@ -147,7 +150,7 @@ void ofApp::keyReleased(int key){
     if(key=='r'){
         recording = !recording;
         if(recording && !recorder.isInitialized()) {
-            recorder.setup(fileName+ofGetTimestampString()+fileExtension, 400, 300, 30); // no audio
+            recorder.setup(fileName+ofGetTimestampString()+fileExtension, depthImage.getWidth(), depthImage.getHeight(), 30); // no audio
             
             // Start recording
             recorder.start();
