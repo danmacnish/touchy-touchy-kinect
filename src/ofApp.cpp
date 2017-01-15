@@ -7,7 +7,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     //set logging level
-    ofSetLogLevel(OF_LOG_VERBOSE);
+    ofSetLogLevel(OF_LOG_WARNING);
     
     //add listener methods for GUI sliders
     nearClip.addListener(this, &ofApp::nearClipChanged);
@@ -61,6 +61,7 @@ void ofApp::update(){
     if(kinect.isFrameNewDepth()) {
         //get the depth frame
         depthImage.setFromPixels(kinect.getDepthPixels());
+        //depthImage.resize(320,240);
         if(recording) {
             bool success = recorder.addFrame(depthImage.getPixels());
             if (!success) {
@@ -82,7 +83,7 @@ void ofApp::draw(){
     ofSetColor(255, 255, 255);
     
     //draw depth image on screen
-    depthImage.draw(300,10,400,300);
+    depthImage.draw(400,10,320,240);
     
     //draw gui
     gui.draw();
@@ -150,7 +151,7 @@ void ofApp::keyReleased(int key){
     if(key=='r'){
         recording = !recording;
         if(recording && !recorder.isInitialized()) {
-            recorder.setup(fileName+ofGetTimestampString()+fileExtension, depthImage.getWidth(), depthImage.getHeight(), 30); // no audio
+            recorder.setup(fileName+ofGetTimestampString()+fileExtension, depthImage.getWidth(), depthImage.getHeight(), 60); // no audio
             
             // Start recording
             recorder.start();
